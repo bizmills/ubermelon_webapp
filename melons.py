@@ -37,6 +37,15 @@ def shopping_cart():
     
 @app.route("/add_to_cart/<int:id>")
 def add_to_cart(id):
+    #  if cart != session:
+    #     cart = []
+    #     cart.append(melon)
+    # else:
+    #     cart.append(melon)
+
+    # return cart
+
+    session["key"] = "I hate melons"
     """TODO: Finish shopping cart functionality using session variables to hold
     cart list.
     
