@@ -1,6 +1,7 @@
 from flask import Flask, request, session, render_template, g, redirect, url_for, flash
 import model
 import jinja2
+from collections import Counter
 
 
 app = Flask(__name__)
@@ -32,17 +33,15 @@ def show_melon(id):
 def shopping_cart():
     if "cart" in session:
         cart_list = session["cart"]
+        #Should return a dictionary with key = id and values = qty
+        quantity = Counter(cart_list)
         cart_dict={}
         for item in range(len(cart_list)):
             melon_id = cart_list[item]
             melon = model.get_melon_by_id(melon_id)
             cart_dict[melon.id] = [melon.common_name,melon.price]
             
-            # print melon.id, melon.common_name
-        # print "SHOPPING_CART", session.get("cart")
-
-        # print "OUTPUT FROM /cart", melon
-        print cart_dict
+        print "TESTING QTY", quantity
 
     return render_template("cart.html",
                   cart_melons = cart_list)
