@@ -91,7 +91,13 @@ def show_login():
 def process_login():
     """TODO: Receive the user's login credentials located in the 'request.form'
     dictionary, look up the user, and store them in the session."""
-    return "Oops! This needs to be implemented"
+ 
+    request.form.get('name')
+    request.form.get('password')
+
+    print request.form.get('name')
+    flash("congrats! you made it through our login process!")
+    return render_template("login.html") 
 
 
 @app.route("/checkout")
