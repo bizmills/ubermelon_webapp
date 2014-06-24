@@ -44,8 +44,17 @@ def shopping_cart():
         melon_dict = {}
         for melon_id, quantity in melon_ids.items():
             melon = model.get_melon_by_id(melon_id)
-            melon_dict[melon] = quantity
- 
+            melon_dict[melon_id] = {
+                "common_name": melon.common_name,
+                "qty": quantity,
+                "price": melon.price,
+                "subtotal": melon.price * quantity
+            }
+            # melon_dict[melon] = quantity
+        basket = melon_dict.keys()
+        # for key in basket:
+        #     print melon_dict[key]['common_name']
+        # print melon_dict.keys()
 
         #Should return a dictionary with key = id and values = qty
         # quantity = Counter(cart_list)
@@ -56,13 +65,13 @@ def shopping_cart():
         #     cart_dict[melon.id] = [melon.common_name,melon.price, ]
             
         # print "TESTING QTY", quantity
-        print "TESTING MELON" , melon
-        print "TESTING CARTLIST" , cart_list
-        print "TESTING DICTIONARY", melon_ids
+        # print "TESTING MELON" , melon
+        # print "TESTING CARTLIST" , cart_list
+        # print "TESTING DICTIONARY", melon_ids
         print melon_dict
 
     return render_template("cart.html",
-                  cart_melons = melon_dict)
+                  melon_dict = melon_dict, basket = basket)
 
     """TODO: Display the contents of the shopping cart. The shopping cart is a
     list held in the session that contains all the melons to be added. Check
