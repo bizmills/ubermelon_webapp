@@ -1,7 +1,6 @@
 from flask import Flask, request, session, render_template, g, redirect, url_for, flash
 import model
 import jinja2
-from collections import Counter
 
 
 app = Flask(__name__)
@@ -42,6 +41,7 @@ def shopping_cart():
                 melon_ids[melon_id] = 1
 
         melon_dict = {}
+        total = 0
         for melon_id, quantity in melon_ids.items():
             melon = model.get_melon_by_id(melon_id)
             melon_dict[melon_id] = {
@@ -50,28 +50,14 @@ def shopping_cart():
                 "price": melon.price,
                 "subtotal": melon.price * quantity
             }
-            # melon_dict[melon] = quantity
+            total += melon_dict[melon_id]['subtotal']
         basket = melon_dict.keys()
-        # for key in basket:
-        #     print melon_dict[key]['common_name']
-        # print melon_dict.keys()
-
-        #Should return a dictionary with key = id and values = qty
-        # quantity = Counter(cart_list)
-        # cart_dict={}
-        # for item in range(len(cart_list)):
-        #     melon_id = cart_list[item]
-        #     melon = model.get_melon_by_id(melon_id)
-        #     cart_dict[melon.id] = [melon.common_name,melon.price, ]
-            
-        # print "TESTING QTY", quantity
-        # print "TESTING MELON" , melon
-        # print "TESTING CARTLIST" , cart_list
+    
         # print "TESTING DICTIONARY", melon_ids
         print melon_dict
 
     return render_template("cart.html",
-                  melon_dict = melon_dict, basket = basket)
+                  melon_dict = melon_dict, basket = basket, total = total)
 
     """TODO: Display the contents of the shopping cart. The shopping cart is a
     list held in the session that contains all the melons to be added. Check

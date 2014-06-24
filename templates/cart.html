@@ -4,13 +4,13 @@
 <table class="table table-striped">
     <tr><th>Melon Name</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
       {% for key in basket %}
-   <tr><td>{{melon_dict[key]['common_name']}}</td><td>{{melon_dict[key]['qty']}}</td><td>{{melon_dict[key]['price']}}</td><td>{{melon_dict[key]['subtotal']}}</td></tr>
+   <tr><td>{{melon_dict[key]['common_name']}}</td><td>{{melon_dict[key]['qty']}}</td><td>${{melon_dict[key]['price']}}</td><td>${{melon_dict[key]['subtotal']}}</td></tr>
     {%endfor%}
 
     
    
 </table>
-<h3>Total: $27.00</h3>
+<h3>${{total}}</h3>
 
 <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
 {% endblock %}
